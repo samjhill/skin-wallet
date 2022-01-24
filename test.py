@@ -37,7 +37,7 @@ def test_decypher_word_simple():
 def test_cypher_shift_array_wraps_simple():
     assert decypher_word("UGVXMQQKXQUH", [1,2,3,4]) == "TESTLONGWORD"
 
-def test_cypher_word_complex():
+def test_decypher_word_complex():
     assert decypher_word("XOQU", [4,10,24,1]) == "TEST"
 
 def test_get_seed_words():
