@@ -7,6 +7,10 @@ Encodes words with a [Vigenère Cypher](https://en.wikipedia.org/wiki/Vigen%C3%A
 
 In theory, this could allow you to get a tattoo with this cyphered phrase and be able to access your seed phrase from anywhere, carrying nothing on your person, and without a computer, while anyone looking at the words would not be able to decypher them unless they knew the array you used to set it up.
 
+To add another layer of security, I was thinking you could use UV-reactive tattoo ink, so you'd have to know where to look (and have a blacklight) to find the cyphered phrase.
+
+![UV Tattoo Ink](./images/blacklight_tattoo.jpeg)
+
 I do not condone this. This is all just for fun and theory.
 
 For example:
