@@ -9,7 +9,7 @@ def main():
     
     decyphered_results = []
 
-    for i in range(0, 24):
+    for i in range(0, 23):
         word = input(f"Enter cyphered seed word {i + 1}:")
         result = decypher_word(word, shift_numbers)
         decyphered_results.append(result)
