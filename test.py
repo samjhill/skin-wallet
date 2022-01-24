@@ -21,7 +21,6 @@ def test_cypher_shift_array_wraps_simple():
 def test_cypher_word_complex():
     assert cypher_word("test", [4,10,24,1]) == "XOQU"
 
-
 def test_decypher_one_digit():
     assert decypher("B", 1) == "A"
 
