@@ -5,7 +5,7 @@ Store your [wallet seed phrase](https://unchained.com/blog/what-is-a-bitcoin-see
 
 Example output:
 
-![Example Output](./images/example-output.jpeg)
+![Example Output](./images/example-output.png)
 
 Encodes words with a [Vigenère Cypher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher). It shifts each character in each word by one number in a list of numbers you provide (as opposed to every word shifted the same amount, like a [Caesar Cypher](https://en.wikipedia.org/wiki/Caesar_cipher)). In this way, all you have to do is remember the list to be able to decode your cyphered seed phrase and access your money. 
 
