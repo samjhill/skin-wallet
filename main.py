@@ -97,16 +97,23 @@ def main():
         print(f"{cyphered_results} \n")
 
     print("Verification time!")
-    for i in range(0, 24):
-        # word = input(f"Enter cyphered seed word {i + 1}:")
-        # result = decypher_word(word, shift_numbers)
-        result = decypher_word(cyphered_results[i], shift_numbers)
-        decyphered_results.append(result)
+    should_verify = input("Want to verify your cyphered seed phrase?")
 
-        if decypher_word(cyphered_results[i], shift_numbers) != result:
-            print(f"Error in word {i + 1}: cyphered: {word}, decyphered: {result}. Should be {cyphered_results[i]}")
-        else:
-            print("Correct!")
+    if should_verify == "n":
+        for i in range(0, 24):
+            result = decypher_word(cyphered_results[i], shift_numbers)
+            decyphered_results.append(result)
+    else:
+        for i in range(0, 24):
+            word = input(f"Enter cyphered seed word {i + 1}:")
+            result = decypher_word(word, shift_numbers)
+            decyphered_results.append(result)
+
+            if decypher_word(cyphered_results[i], shift_numbers) != result:
+                print(f"Error in word {i + 1}: cyphered: {word}, decyphered: {result}. Should be {cyphered_results[i]}")
+            else:
+                print("Correct!")
+
 
     seed_phrase = " ".join(decyphered_results)
     root_address, root_public_hex, root_private_wif = get_wallet_info(seed_phrase)
@@ -126,6 +133,8 @@ def main():
     svg_path = f"{root_public_hex}.svg"
     write_text_to_svg(svg_path, cyphered_results)
     print(f"Saved cyphered seed words image to {svg_path}")
+
+    print(f"Your decryption key (REMEMBER THIS FOREVER OR LOSE YOUR COINS): {shift_numbers_str}")
     
 
 
