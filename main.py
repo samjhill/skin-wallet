@@ -112,19 +112,20 @@ def main():
     root_address, root_public_hex, root_private_wif = get_wallet_info(seed_phrase)
 
     print("------ \n")
-    print("Wallet info:\n")
 
     # print(f"Root address: {root_address}")
     print(f"Deposit coins here (public address): {root_public_hex}")
 
     img = qrcode.make(root_public_hex)
-    img_path = f"btc-{root_public_hex}.png"
-    img.save(img_path)
+    qr_img_path = f"btc-{root_public_hex}.png"
+    img.save(qr_img_path)
 
-    print(f"Saved QR code to {img_path}")
+    print(f"Saved deposit-address's QR code to {qr_img_path}")
 
     # print(f"Root private address: {root_private_wif}")
-    write_text_to_svg(f"{root_public_hex}.svg", cyphered_results)
+    svg_path = f"{root_public_hex}.svg"
+    write_text_to_svg(svg_path, cyphered_results)
+    print(f"Saved cyphered seed words image to {svg_path}")
     
 
 

@@ -1,7 +1,7 @@
 Skin Wallet
 ====
 
-Store your [wallet seed phrase](https://unchained.com/blog/what-is-a-bitcoin-seed-phrase/) in plain sight, with low risk of decoding.
+Store your [wallet seed phrase](https://unchained.com/blog/what-is-a-bitcoin-seed-phrase/) in plain sight, with low risk of decoding. Creates an SVG of the encrypted phrase and a QR code for coin deposit.
 
 Example output:
 

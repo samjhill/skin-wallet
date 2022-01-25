@@ -12,7 +12,7 @@ def write_text_to_svg(filename, seed_words):
     svg_document.add(
         svg_document.rect(
             insert=(10, 10),
-            size=("180px", len(seed_words) * 31),
+            size=("200px", len(seed_words) * 31),
             stroke_width="2",
             stroke="black",
             fill="none",
