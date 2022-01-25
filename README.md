@@ -3,6 +3,10 @@ Skin Wallet
 
 Store your [wallet seed phrase](https://unchained.com/blog/what-is-a-bitcoin-seed-phrase/) in plain sight, with low risk of decoding.
 
+Example output:
+
+![Example Output](./images/example-output.jpeg)
+
 Encodes words with a [Vigenère Cypher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher). It shifts each character in each word by one number in a list of numbers you provide (as opposed to every word shifted the same amount, like a [Caesar Cypher](https://en.wikipedia.org/wiki/Caesar_cipher)). In this way, all you have to do is remember the list to be able to decode your cyphered seed phrase and access your money. 
 
 In theory, this could allow you to get a tattoo with this cyphered phrase and be able to access your seed phrase from anywhere, carrying nothing on your person, and without a computer, while anyone looking at the words would not be able to decypher them unless they knew the array you used to set it up.

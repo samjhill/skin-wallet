@@ -1,6 +1,7 @@
 import qrcode
 
 from seed import get_seed_phrase, get_wallet_info
+from svg import write_text_to_svg
 
 
 LETTERS = [
@@ -97,17 +98,18 @@ def main():
 
     print("Verification time!")
     for i in range(0, 24):
-        word = input(f"Enter cyphered seed word {i + 1}:")
-        result = decypher_word(word, shift_numbers)
-        # result = decypher_word(cyphered_results[i], shift_numbers)
-        # decyphered_results.append(result)
+        # word = input(f"Enter cyphered seed word {i + 1}:")
+        # result = decypher_word(word, shift_numbers)
+        result = decypher_word(cyphered_results[i], shift_numbers)
+        decyphered_results.append(result)
 
         if decypher_word(cyphered_results[i], shift_numbers) != result:
             print(f"Error in word {i + 1}: cyphered: {word}, decyphered: {result}. Should be {cyphered_results[i]}")
         else:
             print("Correct!")
 
-    root_address, root_public_hex, root_private_wif = get_wallet_info(" ".join(decyphered_results))
+    seed_phrase = " ".join(decyphered_results)
+    root_address, root_public_hex, root_private_wif = get_wallet_info(seed_phrase)
 
     print("------ \n")
     print("Wallet info:\n")
@@ -120,7 +122,9 @@ def main():
     img.save(img_path)
 
     print(f"Saved QR code to {img_path}")
+
     # print(f"Root private address: {root_private_wif}")
+    write_text_to_svg(f"{root_public_hex}.svg", cyphered_results)
     
 
 
