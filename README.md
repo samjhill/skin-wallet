@@ -58,7 +58,7 @@ Write each word vertically, and decode each letter by applying the following pat
 2) find the shift_number, which is the number in the numeric list you memorized, against the index of the current letter. i.e.: [1,2,3,4] against `TEST`. Letter `E`'s shift_number is `2`.
 3) Subtract this shift_number (item 2) from the letter_position (item 1), wrapping around the number of letters in the alphabet (26). 
 
-For example, the letter_position is `2 (C)`, and the shift_number is `1`, the decyphered letter is `B`. 
+For example, if the letter_position is `2 (C)`, and the shift_number is `1`, the decyphered letter is `B`. 
 
 If the letter_position is `0 (A)`, and the shift_number is `3`, the decyphered letter is `X`. It wraps backwards around the alphabet.
 
