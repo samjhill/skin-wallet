@@ -28,10 +28,9 @@ def write_seed_phrase_to_svg(filename, seed_words):
 
 
 def write_decryption_key_to_svg(filename, shift_numbers, shape="rect"):
-    doc_width = 400
-    doc_height = 400
+    doc_width = 800
+    doc_height = 800
     svg_document = svgwrite.Drawing(filename=filename, size=(f"{doc_width}px", f"{doc_height}px"))
-    colors = ["red", "blue", "green", "black"]
 
     for i in range(0, len(shift_numbers)):
         num_items_per_row = shift_numbers[i]
@@ -44,7 +43,7 @@ def write_decryption_key_to_svg(filename, shift_numbers, shape="rect"):
                         insert=(((width) * j) + 40, (num_items_per_row * 20) + 20),
                         size=(f"{width}px", "40px"),
                         stroke_width="3",
-                        stroke=colors[i],
+                        stroke="black",
                         fill="none",
                     )
                 )
@@ -54,7 +53,7 @@ def write_decryption_key_to_svg(filename, shift_numbers, shape="rect"):
                         center=(doc_width - (width * j + 20), i * 25 + 20),
                         r=("10px"),
                         stroke_width="3",
-                        stroke=colors[i],
+                        stroke="black",
                         fill="none",
                     )
                 )
