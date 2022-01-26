@@ -1,7 +1,7 @@
 import qrcode
 
 from seed import get_seed_phrase, get_wallet_info
-from svg import write_text_to_svg
+from svg import write_decryption_key_to_svg, write_seed_phrase_to_svg, write_svg_to_png
 
 
 LETTERS = [
@@ -130,9 +130,21 @@ def main():
     print(f"Saved deposit-address's QR code to {qr_img_path}")
 
     # print(f"Root private address: {root_private_wif}")
-    svg_path = f"{root_public_hex}.svg"
-    write_text_to_svg(svg_path, cyphered_results)
-    print(f"Saved cyphered seed words image to {svg_path}")
+    svg_path = f"cyphered-seed-{root_public_hex}.svg"
+    png_path = f"cyphered-seed-{root_public_hex}.png"
+    seed_svg = write_seed_phrase_to_svg(svg_path, cyphered_results)
+    print(f"Saved cyphered seed words SVG to {svg_path}")
+    write_svg_to_png(png_path, svg_path)
+    print(f"Saved cyphered seed words PNG to {png_path}")
+    
+
+    decryption_key_path = f"decryption-key-{root_public_hex}.svg"
+    decryption_key_png_path = f"decryption-key-{root_public_hex}.png"
+    shape = input(f"What shape do you want for your decription key? circle, rect:")
+    decryption_svg = write_decryption_key_to_svg(decryption_key_path, shift_numbers, shape)
+    print(f"Saved decryption key SVG to {decryption_key_path}")
+    write_svg_to_png(decryption_key_png_path, decryption_key_path)
+    print(f"Saved decryption key PNG to {decryption_key_png_path}")
 
     print(f"Your decryption key (REMEMBER THIS FOREVER OR LOSE YOUR COINS): {shift_numbers_str}")
     
