@@ -40,7 +40,7 @@ def write_decryption_key_to_svg(filename, shift_numbers, shape="rect"):
             if shape == "rect":
                 svg_document.add(
                     svg_document.rect(
-                        insert=(((width) * j) + 40, (num_items_per_row * 20) + 20),
+                        insert=((width * j), i * 40 + 20),
                         size=(f"{width}px", "40px"),
                         stroke_width="3",
                         stroke="black",
@@ -71,4 +71,4 @@ def write_svg_to_png(filename, svg):
 
 
 if __name__ == "__main__":
-    write_decryption_key_to_svg("test-key.svg", [2, 8, 1, 4], shape="circle")
+    write_decryption_key_to_svg("test-key.svg", [3,6,5,2], shape="rect")

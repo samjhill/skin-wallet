@@ -7,11 +7,21 @@ Example cyphered seed:
 
 ![Example Output](./images/cyphered-seed.png)
 
-Example decryption key [3, 6, 5, 2]:
 
-![Decryption Key](./images/decryption-key.png)
+Your decryption key is also generated into art that you can hide inside another tattoo, if you wish.
+Example decryption key [3, 6, 5, 2]. There are a few options you can try.
 
-Encodes words with a [Vigenère Cypher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher). It shifts each character in each word by one number in a list of numbers you provide (as opposed to every word shifted the same amount, like a [Caesar Cypher](https://en.wikipedia.org/wiki/Caesar_cipher)). In this way, all you have to do is remember the list to be able to decode your cyphered seed phrase and access your money. 
+Circle:
+
+![Decryption Key Circle](./images/decryption-key-circle.png)
+
+Rect:
+
+![Decryption Key Rectangle](./images/decryption-key-rect.png)
+
+
+
+Encodes words with a [Vigenère Cypher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher). It shifts each character in each word by one number in a list of numbers you provide (as opposed to every word shifted the same amount, like a [Caesar Cypher](https://en.wikipedia.org/wiki/Caesar_cipher)). In this way, all you have to do is remember the list (or safely store the decryption key above hidden in another tattoo) to be able to decode your cyphered seed phrase and access your money. 
 
 In theory, this could allow you to get a tattoo with this cyphered phrase and be able to access your seed phrase from anywhere, carrying nothing on your person, and without a computer, while anyone looking at the words would not be able to decypher them unless they knew the array you used to set it up.
 
