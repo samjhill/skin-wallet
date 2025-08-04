@@ -232,7 +232,17 @@ function displayEncryptResults(encryptedWords, seedSVG, keySVG, originalPhrase) 
     const keyContainer = document.getElementById('key-svg-container');
     
     if (seedContainer) {
-        seedContainer.innerHTML = seedSVG;
+        // Test with a simple SVG if the generated one is empty
+        if (!seedSVG || seedSVG.trim() === '') {
+            console.log('Generated SVG is empty, creating test SVG');
+            const testSVG = `<svg width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="200" height="100" stroke="black" stroke-width="2" fill="none"/>
+                <text x="20" y="50" font-family="Arial" font-size="16">Test SVG - Generated SVG was empty</text>
+            </svg>`;
+            seedContainer.innerHTML = testSVG;
+        } else {
+            seedContainer.innerHTML = seedSVG;
+        }
         console.log('Seed SVG container updated');
     } else {
         console.error('Seed SVG container not found');
@@ -438,15 +448,23 @@ cypher_phrase("${words.join(' ')}", ${JSON.stringify(shiftNumbers)})
 `);
                 
                 // Generate SVGs
+                console.log('Generating seed SVG with words:', encryptedWords);
                 const seedSVG = await pyodide.runPythonAsync(`
 create_seed_svg(${JSON.stringify(encryptedWords)})
 `);
+                console.log('Seed SVG generated:', seedSVG);
                 
+                console.log('Generating key SVG with shift numbers:', shiftNumbers, 'style:', keyStyle);
                 const keySVG = await pyodide.runPythonAsync(`
 create_key_svg(${JSON.stringify(shiftNumbers)}, "${keyStyle}")
 `);
+                console.log('Key SVG generated:', keySVG);
                 
                 // Display results
+                console.log('About to display results');
+                console.log('encryptedWords:', encryptedWords);
+                console.log('seedSVG length:', seedSVG ? seedSVG.length : 'undefined');
+                console.log('keySVG length:', keySVG ? keySVG.length : 'undefined');
                 displayEncryptResults(encryptedWords, seedSVG, keySVG, words.join(' '));
                 
             } catch (error) {
