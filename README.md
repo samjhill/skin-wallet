@@ -3,6 +3,27 @@ Skin Wallet
 
 Store your [wallet seed phrase](https://unchained.com/blog/what-is-a-bitcoin-seed-phrase/) in plain sight, with low risk of decoding. Creates an SVG and PNG of the encrypted phrase, the decryption key, and a QR code for coin deposit.
 
+## 🌐 Web Interface
+
+**Try the live web interface:** [Skin Wallet Generator](https://samjhill.github.io/skin-wallet/)
+
+The web interface allows you to:
+- 🔒 **Encrypt** seed phrases with a custom decryption key
+- 🔓 **Decrypt** encrypted phrases back to readable text
+- 🎨 **Generate visual art** (SVG/PNG) for tattoo designs
+- 📱 **Create QR codes** for easy sharing
+- 💾 **Download** all outputs in various formats
+
+**Features:**
+- ✨ **Modern, responsive UI** that works on all devices
+- 🔐 **Client-side processing** - your data never leaves your browser
+- 🚀 **Powered by Pyodide** - runs Python code directly in the browser
+- 📱 **Mobile-friendly** design with touch-optimized controls
+- 🎯 **Real-time validation** and word counting
+- 📊 **Multiple output formats** (SVG, PNG, QR codes, text files)
+
+**Security:** All processing happens locally in your browser using Pyodide. No data is sent to any server.
+
 Example cyphered seed:
 
 ![Example Output](./images/cyphered-seed.png)
@@ -29,7 +50,20 @@ To add another layer of security, I was thinking you could use UV-reactive tatto
 
 ![UV Tattoo Ink](./images/blacklight_tattoo.jpeg)
 
-I do not condone this. This is all just for fun and theory.
+⚠️ **IMPORTANT DISCLAIMERS:**
+
+1. **Educational Purpose Only:** This tool is for educational and artistic purposes only
+2. **Not Cryptographically Secure:** The Vigenère cipher is easily breakable by modern standards
+3. **Not for Real Cryptocurrency:** Do not use this for actual cryptocurrency storage
+4. **Tattoo Risks:** Tattoos are permanent and can fade, blur, or become unreadable
+5. **No Recovery:** If you lose the decryption key or can't read the tattoo, funds are lost forever
+
+**For real cryptocurrency security, use:**
+- Hardware wallets (Ledger, Trezor)
+- Secure paper backups
+- Professional security practices
+
+This project is **for fun and theory only**.
 
 For example:
 
@@ -48,23 +82,30 @@ In this example, `"TEST"` is one of your seed words:
 "T" is shifted by 4 characters, to "X".
 ```
 
-Setup
-====
-`pip install -r requirements.txt`
+## 🚀 Quick Start
 
+### Web Interface (Recommended)
+1. Visit the [live web interface](https://yourusername.github.io/skin-wallet/)
+2. Enter your 24-word seed phrase
+3. Choose a decryption key (numbers 1-26)
+4. Generate encrypted outputs and download them
 
-Usage
-====
+### Command Line Setup
+```bash
+pip install -r requirements.txt
+```
+
+### Command Line Usage
 
 Generate a skin wallet:
-----
+```bash
+python main.py
+```
 
-`python main.py`
-
-
-Decypher a skin wallet with a computer:
-----
-`python decypher.py`
+Decrypt a skin wallet:
+```bash
+python decypher.py
+```
 
 Decypher a skin wallet without a computer:
 ----

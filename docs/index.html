@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Wallet Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Skin Wallet Generator</h1>
+            <p class="subtitle">Generate encrypted seed phrases for artistic storage</p>
+        </header>
+
+        <div class="warning">
+            <strong>⚠️ DISCLAIMER:</strong> This tool is for educational purposes only. 
+            Do not use for actual cryptocurrency storage. Tattoos are permanent and this method is not cryptographically secure.
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('encrypt')">🔒 Encrypt</button>
+            <button class="tab-btn" onclick="showTab('decrypt')">🔓 Decrypt</button>
+        </div>
+
+        <!-- Encryption Tab -->
+        <div id="encrypt-tab" class="tab-content active">
+            <form id="encrypt-form">
+                <div class="form-group">
+                    <label for="seed-phrase">Seed Phrase (24 words):</label>
+                    <textarea id="seed-phrase" placeholder="Enter 24 seed words separated by spaces or newlines" rows="4"></textarea>
+                    <div class="word-count">Words: <span id="word-count">0</span>/24</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="decryption-key">Decryption Key (numbers separated by spaces):</label>
+                    <input type="text" id="decryption-key" placeholder="e.g., 3 6 5 2 1 4" />
+                    <div class="help-text">Enter numbers 1-26, separated by spaces. You must remember this forever!</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="key-style">Decryption Key Style:</label>
+                    <select id="key-style">
+                        <option value="rect">Rectangle</option>
+                        <option value="circle">Circle</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">🔐 Generate Encrypted Wallet</button>
+            </form>
+
+            <div id="encrypt-results" class="results hidden">
+                <h3>Generated Output</h3>
+                
+                <div class="output-section">
+                    <h4>Encrypted Seed Phrase</h4>
+                    <div id="encrypted-words" class="encrypted-words"></div>
+                    <button onclick="downloadEncryptedText()" class="btn-secondary">📄 Download as Text</button>
+                </div>
+
+                <div class="output-section">
+                    <h4>Visual Output</h4>
+                    <div class="visual-outputs">
+                        <div class="output-item">
+                            <h5>Encrypted Seed SVG</h5>
+                            <div id="seed-svg-container"></div>
+                            <button onclick="downloadSVG('seed')" class="btn-secondary">📁 Download SVG</button>
+                            <button onclick="downloadPNG('seed')" class="btn-secondary">🖼️ Download PNG</button>
+                        </div>
+                        
+                        <div class="output-item">
+                            <h5>Decryption Key Art</h5>
+                            <div id="key-svg-container"></div>
+                            <button onclick="downloadSVG('key')" class="btn-secondary">📁 Download SVG</button>
+                            <button onclick="downloadPNG('key')" class="btn-secondary">🖼️ Download PNG</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <h4>QR Code</h4>
+                    <div id="qr-container"></div>
+                    <button onclick="downloadQR()" class="btn-secondary">📱 Download QR Code</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decryption Tab -->
+        <div id="decrypt-tab" class="tab-content">
+            <form id="decrypt-form">
+                <div class="form-group">
+                    <label for="encrypted-phrase">Encrypted Words (one per line):</label>
+                    <textarea id="encrypted-phrase" placeholder="Enter encrypted words, one per line" rows="8"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="decrypt-key">Decryption Key:</label>
+                    <input type="text" id="decrypt-key" placeholder="e.g., 3 6 5 2 1 4" />
+                </div>
+
+                <button type="submit" class="btn-primary">🔓 Decrypt Seed Phrase</button>
+            </form>
+
+            <div id="decrypt-results" class="results hidden">
+                <h3>Decrypted Result</h3>
+                <div id="decrypted-words" class="decrypted-words"></div>
+                <button onclick="downloadDecryptedText()" class="btn-secondary">📄 Download as Text</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>⚠️ <strong>WARNING:</strong> This is for educational purposes only. Do not use for actual cryptocurrency storage.</p>
+        <p>Built with ❤️ using <a href="https://pyodide.org/" target="_blank">Pyodide</a> - runs entirely in your browser</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html> 
