@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Count Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; }
+        .result { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Word Count Debug</h1>
+    
+    <div class="debug-section">
+        <h2>Test Input</h2>
+        <textarea id="test-input" placeholder="Paste seed phrase here..."></textarea>
+        <div class="result">
+            <strong>Word Count: <span id="word-count">0</span>/24</strong>
+        </div>
+        <button onclick="testWordCount()">Test Word Count Function</button>
+        <button onclick="clearInput()">Clear Input</button>
+    </div>
+    
+    <div class="debug-section">
+        <h2>Console Output</h2>
+        <div id="console-output" style="background: #000; color: #0f0; padding: 10px; height: 200px; overflow-y: scroll; font-family: monospace;"></div>
+    </div>
+    
+    <script>
+        // Override console.log to capture output
+        const originalLog = console.log;
+        const consoleOutput = document.getElementById('console-output');
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const message = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : String(arg)).join(' ');
+            consoleOutput.innerHTML += message + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+        
+        function updateWordCount(text) {
+            const trimmedText = text.trim();
+            const words = trimmedText.split(/\s+/).filter(word => word.length > 0);
+            document.getElementById('word-count').textContent = words.length;
+            
+            console.log('=== Word Count Debug ===');
+            console.log('Input text:', trimmedText);
+            console.log('Words found:', words);
+            console.log('Word count:', words.length);
+            console.log('=======================');
+        }
+        
+        function testWordCount() {
+            const testPhrase = "drum deliver cruise refuse sport charge payment turtle section effort canal hurdle treat action picnic child glimpse urban solve execute club raven girl drama";
+            document.getElementById('test-input').value = testPhrase;
+            updateWordCount(testPhrase);
+        }
+        
+        function clearInput() {
+            document.getElementById('test-input').value = '';
+            updateWordCount('');
+        }
+        
+        // Set up event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, setting up event listeners...');
+            
+            const testInput = document.getElementById('test-input');
+            if (testInput) {
+                console.log('Found test input element');
+                
+                testInput.addEventListener('input', function() {
+                    console.log('Input event fired');
+                    updateWordCount(this.value);
+                });
+                
+                testInput.addEventListener('paste', function(e) {
+                    console.log('Paste event fired');
+                    setTimeout(() => {
+                        const text = this.value;
+                        const normalizedText = text.replace(/\s+/g, ' ').trim();
+                        this.value = normalizedText;
+                        updateWordCount(normalizedText);
+                    }, 10);
+                });
+                
+                console.log('Event listeners set up successfully');
+            } else {
+                console.log('ERROR: Could not find test input element');
+            }
+        });
+    </script>
+</body>
+</html> 

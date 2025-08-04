@@ -285,6 +285,37 @@ footer a:hover {
     text-decoration: underline;
 }
 
+.footer-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.footer-link:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.footer-link span {
+    font-size: 1.1rem;
+}
+
 /* Loading states */
 .loading {
     opacity: 0.6;
@@ -336,5 +367,14 @@ footer a:hover {
     .btn-primary {
         padding: 12px 20px;
         font-size: 1rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .footer-link {
+        justify-content: center;
     }
 } 

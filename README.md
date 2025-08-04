@@ -24,6 +24,11 @@ The web interface allows you to:
 
 **Security:** All processing happens locally in your browser using Pyodide. No data is sent to any server.
 
+**Links:**
+- 🌐 **Live Demo:** [Skin Wallet Generator](https://samjhill.github.io/skin-wallet/)
+- 📚 **Source Code:** [GitHub Repository](https://github.com/samjhill/skin-wallet)
+- 👨‍💻 **Developer:** [samjhill.com](https://samjhill.com)
+
 Example cyphered seed:
 
 ![Example Output](./images/cyphered-seed.png)

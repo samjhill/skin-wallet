@@ -6,7 +6,7 @@
     <title>Skin Wallet Generator</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -79,11 +79,7 @@
                     </div>
                 </div>
 
-                <div class="output-section">
-                    <h4>QR Code</h4>
-                    <div id="qr-container"></div>
-                    <button onclick="downloadQR()" class="btn-secondary">📱 Download QR Code</button>
-                </div>
+
             </div>
         </div>
 
@@ -114,6 +110,14 @@
     <footer>
         <p>⚠️ <strong>WARNING:</strong> This is for educational purposes only. Do not use for actual cryptocurrency storage.</p>
         <p>Built with ❤️ using <a href="https://pyodide.org/" target="_blank">Pyodide</a> - runs entirely in your browser</p>
+        <div class="footer-links">
+            <a href="https://github.com/samjhill/skin-wallet" target="_blank" class="footer-link">
+                <span>📚</span> View on GitHub
+            </a>
+            <a href="https://samjhill.com" target="_blank" class="footer-link">
+                <span>👨‍💻</span> samjhill.com
+            </a>
+        </div>
     </footer>
 
     <script src="app.js"></script>

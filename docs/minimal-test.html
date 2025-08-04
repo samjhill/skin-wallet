@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Skin Wallet Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        textarea, input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        textarea { height: 100px; }
+        .word-count { color: #666; font-size: 0.9em; }
+        .result { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Minimal Skin Wallet Test</h1>
+    
+    <div class="form-group">
+        <label for="seed-phrase">Seed Phrase (24 words):</label>
+        <textarea id="seed-phrase" placeholder="Enter 24 seed words separated by spaces or newlines"></textarea>
+        <div class="word-count">Words: <span id="word-count">0</span>/24</div>
+    </div>
+    
+    <div class="form-group">
+        <label for="decryption-key">Decryption Key:</label>
+        <input type="text" id="decryption-key" placeholder="e.g., 3 6 5 2" />
+    </div>
+    
+    <button onclick="testEncryption()">Test Encryption</button>
+    
+    <div id="results" class="result" style="display: none;">
+        <h3>Results:</h3>
+        <div id="encrypted-words"></div>
+    </div>
+    
+    <div id="debug" class="result">
+        <h3>Debug Info:</h3>
+        <div id="debug-info"></div>
+    </div>
+    
+    <script>
+        // Simple word count function
+        function updateWordCount(text) {
+            const trimmed = text.trim();
+            const words = trimmed.split(/\s+/).filter(word => word.length > 0);
+            document.getElementById('word-count').textContent = words.length;
+            
+            // Debug info
+            document.getElementById('debug-info').innerHTML = `
+                <p><strong>Input:</strong> "${text}"</p>
+                <p><strong>Trimmed:</strong> "${trimmed}"</p>
+                <p><strong>Words:</strong> ${JSON.stringify(words)}</p>
+                <p><strong>Count:</strong> ${words.length}</p>
+            `;
+            
+            return words;
+        }
+        
+        // Test encryption
+        function testEncryption() {
+            const seedPhrase = document.getElementById('seed-phrase').value;
+            const words = updateWordCount(seedPhrase);
+            
+            if (words.length === 24) {
+                document.getElementById('encrypted-words').innerHTML = `
+                    <p><strong>Success!</strong> Found ${words.length} words.</p>
+                    <p><strong>First word:</strong> ${words[0]}</p>
+                    <p><strong>Last word:</strong> ${words[words.length - 1]}</p>
+                `;
+                document.getElementById('results').style.display = 'block';
+            } else {
+                document.getElementById('encrypted-words').innerHTML = `
+                    <p><strong>Error:</strong> Expected 24 words, found ${words.length}</p>
+                `;
+                document.getElementById('results').style.display = 'block';
+            }
+        }
+        
+        // Set up event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - setting up word count');
+            
+            const seedPhraseInput = document.getElementById('seed-phrase');
+            if (seedPhraseInput) {
+                console.log('Found seed phrase input');
+                
+                // Input event
+                seedPhraseInput.addEventListener('input', function() {
+                    console.log('Input event fired');
+                    updateWordCount(this.value);
+                });
+                
+                // Paste event
+                seedPhraseInput.addEventListener('paste', function() {
+                    console.log('Paste event fired');
+                    setTimeout(() => {
+                        const text = this.value;
+                        const normalized = text.replace(/\s+/g, ' ').trim();
+                        this.value = normalized;
+                        updateWordCount(normalized);
+                    }, 10);
+                });
+                
+                console.log('Event listeners added successfully');
+            } else {
+                console.log('ERROR: Could not find seed phrase input');
+            }
+        });
+    </script>
+</body>
+</html> 

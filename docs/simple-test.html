@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Word Count Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; }
+        .result { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Simple Word Count Test</h1>
+    
+    <div>
+        <h2>Test Input</h2>
+        <textarea id="test-input" placeholder="Paste seed phrase here..."></textarea>
+        <div class="result">
+            <strong>Word Count: <span id="word-count">0</span>/24</strong>
+        </div>
+        <button onclick="testWithSample()">Test with Sample</button>
+        <button onclick="clearInput()">Clear</button>
+    </div>
+    
+    <div>
+        <h2>Debug Info</h2>
+        <div id="debug-info"></div>
+    </div>
+    
+    <script>
+        // Simple word count function
+        function countWords(text) {
+            const trimmed = text.trim();
+            const words = trimmed.split(/\s+/).filter(word => word.length > 0);
+            return words.length;
+        }
+        
+        // Update display
+        function updateDisplay() {
+            const input = document.getElementById('test-input');
+            const count = document.getElementById('word-count');
+            const debug = document.getElementById('debug-info');
+            
+            const text = input.value;
+            const wordCount = countWords(text);
+            
+            count.textContent = wordCount;
+            
+            debug.innerHTML = `
+                <p><strong>Raw text:</strong> "${text}"</p>
+                <p><strong>Trimmed:</strong> "${text.trim()}"</p>
+                <p><strong>Words:</strong> ${JSON.stringify(text.trim().split(/\s+/).filter(w => w.length > 0))}</p>
+                <p><strong>Count:</strong> ${wordCount}</p>
+            `;
+        }
+        
+        // Test functions
+        function testWithSample() {
+            const sample = "drum deliver cruise refuse sport charge payment turtle section effort canal hurdle treat action picnic child glimpse urban solve execute club raven girl drama";
+            document.getElementById('test-input').value = sample;
+            updateDisplay();
+        }
+        
+        function clearInput() {
+            document.getElementById('test-input').value = '';
+            updateDisplay();
+        }
+        
+        // Set up event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            const input = document.getElementById('test-input');
+            if (input) {
+                console.log('Found input element');
+                input.addEventListener('input', updateDisplay);
+                input.addEventListener('paste', function() {
+                    setTimeout(updateDisplay, 10);
+                });
+                console.log('Event listeners added');
+            } else {
+                console.log('ERROR: Input element not found');
+            }
+        });
+    </script>
+</body>
+</html> 
