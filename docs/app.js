@@ -137,10 +137,26 @@ function showTab(tabName) {
 
 // Word count tracking
 document.getElementById('seed-phrase').addEventListener('input', function() {
-    const text = this.value.trim();
-    const words = text.split(/\\s+/).filter(word => word.length > 0);
-    document.getElementById('word-count').textContent = words.length;
+    updateWordCount(this.value);
 });
+
+// Handle paste events to normalize text
+document.getElementById('seed-phrase').addEventListener('paste', function(e) {
+    // Let the paste happen, then normalize the text
+    setTimeout(() => {
+        const text = this.value;
+        // Normalize whitespace and newlines
+        const normalizedText = text.replace(/\\s+/g, ' ').trim();
+        this.value = normalizedText;
+        updateWordCount(normalizedText);
+    }, 10);
+});
+
+function updateWordCount(text) {
+    const trimmedText = text.trim();
+    const words = trimmedText.split(/\\s+/).filter(word => word.length > 0);
+    document.getElementById('word-count').textContent = words.length;
+}
 
 // Form validation
 function validateEncryptForm() {

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Count Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; }
+        .result { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Word Count Test</h1>
+    
+    <div class="test-section">
+        <h2>Test Word Counting</h2>
+        <p>Paste the test seed phrase below:</p>
+        <textarea id="test-input" placeholder="Paste seed phrase here..."></textarea>
+        <div class="result">
+            <strong>Word Count: <span id="word-count">0</span>/24</strong>
+        </div>
+        <div class="result">
+            <strong>Words Found:</strong>
+            <div id="words-list"></div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Cases</h2>
+        <button onclick="testCase1()">Test Case 1: Normal spacing</button>
+        <button onclick="testCase2()">Test Case 2: Multiple spaces</button>
+        <button onclick="testCase3()">Test Case 3: Newlines</button>
+        <button onclick="testCase4()">Test Case 4: Mixed whitespace</button>
+    </div>
+    
+    <script>
+        const testSeedPhrase = "drum deliver cruise refuse sport charge payment turtle section effort canal hurdle treat action picnic child glimpse urban solve execute club raven girl drama";
+        
+        function updateWordCount(text) {
+            const trimmedText = text.trim();
+            const words = trimmedText.split(/\s+/).filter(word => word.length > 0);
+            document.getElementById('word-count').textContent = words.length;
+            document.getElementById('words-list').innerHTML = words.map((word, index) => 
+                `<span style="margin: 2px; padding: 2px; background: #e0e0e0; border-radius: 3px;">${index + 1}: ${word}</span>`
+            ).join('');
+            
+            console.log('Input text:', trimmedText);
+            console.log('Words found:', words);
+            console.log('Word count:', words.length);
+        }
+        
+        document.getElementById('test-input').addEventListener('input', function() {
+            updateWordCount(this.value);
+        });
+        
+        document.getElementById('test-input').addEventListener('paste', function(e) {
+            setTimeout(() => {
+                const text = this.value;
+                const normalizedText = text.replace(/\s+/g, ' ').trim();
+                this.value = normalizedText;
+                updateWordCount(normalizedText);
+            }, 10);
+        });
+        
+        function testCase1() {
+            document.getElementById('test-input').value = testSeedPhrase;
+            updateWordCount(testSeedPhrase);
+        }
+        
+        function testCase2() {
+            document.getElementById('test-input').value = testSeedPhrase.replace(/ /g, '   ');
+            updateWordCount(testSeedPhrase.replace(/ /g, '   '));
+        }
+        
+        function testCase3() {
+            document.getElementById('test-input').value = testSeedPhrase.replace(/ /g, '\n');
+            updateWordCount(testSeedPhrase.replace(/ /g, '\n'));
+        }
+        
+        function testCase4() {
+            document.getElementById('test-input').value = testSeedPhrase.replace(/ /g, ' \n\t ');
+            updateWordCount(testSeedPhrase.replace(/ /g, ' \n\t '));
+        }
+    </script>
+</body>
+</html> 
